@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { client } from "../client";
 import { feedQuery, searchQuery } from "../utils/data";
@@ -31,7 +31,18 @@ const Feed = () => {
     return <Spinner message="We are adding new posts to your feed!" />;
 
   if (!posts?.length)
-    return <h2>No posts in this category yet! Why not make one?</h2>;
+    return (
+      <h2>
+        No posts in this category yet!
+        <Link
+          className="text-emerald-500 font-bold hover:text-emerald-600"
+          to="/create-post"
+        >
+          {" "}
+          Why not make one?
+        </Link>
+      </h2>
+    );
   return <div>{posts && <MasonryLayout posts={posts} />}</div>;
 };
 

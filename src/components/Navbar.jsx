@@ -48,7 +48,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         </Link>
         <Link
           to="create-post"
-          className="bg-teal-500 text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
+          className="bg-emerald-500 text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
          justify-center items-center hover:scale-105"
         >
           <IoMdAdd />
@@ -60,7 +60,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
             hover:scale-105"
             onClick={logout}
           >
-            <AiOutlineLogout className="text-teal-500" fontSize={25} />
+            <AiOutlineLogout className="text-emerald-500" fontSize={25} />
           </button>
         )}
       </div>

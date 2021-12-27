@@ -11,7 +11,7 @@ import { client } from "../client";
 import { MasonryLayout, Spinner } from ".";
 
 const activeBtnStyles =
-  "bg-teal-500 text-white font-bold p-2 rounded-full w-20 outline-none";
+  "bg-emerald-500 text-white font-bold p-2 rounded-full w-20 outline-none";
 const notActiveBtnStyles =
   "bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none";
 
@@ -86,7 +86,7 @@ const UserProfile = () => {
                 hover:scale-110"
                 onClick={logout}
               >
-                <AiOutlineLogout className="text-teal-500 " fontSize={25} />
+                <AiOutlineLogout className="text-emerald-500 " fontSize={25} />
               </button>
             )}
           </div>
