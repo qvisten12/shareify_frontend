@@ -12,11 +12,12 @@ const Login = () => {
 
   const responseGoogle = (response) => {
     localStorage.setItem("user", JSON.stringify(response.profileObj));
-    const { googleId, imageUrl } = response.profileObj;
+    console.log(response.profileObj);
+    const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
       _id: googleId,
       _type: "user",
-      userName: "Felix Ljungqvist",
+      userName: name,
       image: imageUrl,
     };
     client.createIfNotExists(doc).then(() => {
