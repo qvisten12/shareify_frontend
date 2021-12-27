@@ -17,7 +17,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
   const user = fetchUser();
 
   const alreadySaved = !!save?.filter(
-    (item) => item.postedBy._id === user?.googleId
+    (item) => item?.postedBy?._id === user?.googleId
   )?.length;
 
   const savePost = (id) => {
