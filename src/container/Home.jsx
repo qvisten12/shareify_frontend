@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 
 import { Sidebar, UserProfile } from "../components";
 
@@ -9,22 +9,28 @@ import { userQuery } from "../utils/data";
 import { fetchUser } from "../utils/fetchUser";
 import { client } from "../client";
 
-import Pins from "./Pins";
-import logo from "../assets/logo.png";
+import Posts from "./Posts";
+import logo from "../assets/logo2.png";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
 
+  const navigate = useNavigate();
+
   const userInfo = fetchUser();
 
   useEffect(() => {
-    const query = userQuery(userInfo?.googleId);
+    if (userInfo) {
+      const query = userQuery(userInfo?.googleId);
 
-    client.fetch(query).then((data) => {
-      setUser(data[0]);
-    });
+      client.fetch(query).then((data) => {
+        setUser(data[0]);
+      });
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   useEffect(() => {
@@ -70,7 +76,7 @@ const Home = () => {
       <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
         <Routes>
           <Route path="/user-profile/:userId" element={<UserProfile />} />
-          <Route path="/*" element={<Pins user={user && user} />} />
+          <Route path="/*" element={<Posts user={user && user} />} />
         </Routes>
       </div>
     </div>

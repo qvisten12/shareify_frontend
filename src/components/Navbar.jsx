@@ -1,11 +1,24 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
+import { AiOutlineLogout } from "react-icons/ai";
+import { GoogleLogout } from "react-google-login";
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
 
   if (!user) return null;
+
+  const User =
+    localStorage.getItem("user") !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : localStorage.clear();
+
+  const logout = () => {
+    localStorage.clear();
+
+    navigate("/login");
+  };
 
   return (
     <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
@@ -25,15 +38,37 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
       </div>
       <div className="flex gap-3">
         <Link to={`user-profile/${user?._id}`} className="hidden md:block">
-          <img src={user.image} alt="user" className="w-14 h-12 rounded-lg" />
+          <img
+            src={user.image}
+            alt="user"
+            className="w-12 h-12 md:w-14 md:h-12 rounded-lg"
+          />
         </Link>
         <Link
-          to="create-pin"
+          to="create-post"
           className="bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
          justify-center items-center"
         >
           <IoMdAdd />
         </Link>
+        {User?.googleId && (
+          <GoogleLogout
+            clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
+            render={(renderProps) => (
+              <button
+                type="button"
+                className=" bg-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
+                justify-center items-center cursor-pointer outline-none shadow-md"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <AiOutlineLogout color="red" fontSize={21} />
+              </button>
+            )}
+            onLogoutSuccess={logout}
+            cookiePolicy="single_host_origin"
+          />
+        )}
       </div>
     </div>
   );

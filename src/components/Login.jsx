@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
-import logo from "../assets/logowhite.png";
+import logo from "../assets/logo2.png";
 
 import { client } from "../client";
 
@@ -45,8 +45,8 @@ const Login = () => {
           className="absolute flex flex-col justify-center items-center top-0 right-0
         left-0 bottom-0 bg-blackOverlay"
         >
-          <div className="p-5">
-            <img src={logo} alt="logo" width="130px" />
+          <div className="p-5 bg-mainColor rounded-lg outline-none">
+            <img src={logo} alt="logo" />
           </div>
 
           <div className="shadow-2xl ">
@@ -55,7 +55,7 @@ const Login = () => {
               render={(renderProps) => (
                 <button
                   type="button"
-                  className="bg-mainColor
+                  className="bg-mainColor mt-5
                 flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
