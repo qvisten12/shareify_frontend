@@ -1,14 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 import { Sidebar, UserProfile } from "../components";
-
 import { userQuery } from "../utils/data";
-import { fetchUser } from "../utils/fetchUser";
 import { client } from "../client";
-
 import Posts from "./Posts";
 import logo from "../assets/logo2.png";
 
@@ -17,7 +14,10 @@ const Home = () => {
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
 
-  const userInfo = fetchUser();
+  const userInfo =
+    localStorage.getItem("user") !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : localStorage.clear();
 
   useEffect(() => {
     const query = userQuery(userInfo?.googleId);

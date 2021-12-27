@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
 import { AiOutlineLogout } from "react-icons/ai";
-import { GoogleLogout } from "react-google-login";
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
@@ -52,22 +51,13 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           <IoMdAdd />
         </Link>
         {User?.googleId && (
-          <GoogleLogout
-            clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
-            render={(renderProps) => (
-              <button
-                type="button"
-                className=" bg-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
-                justify-center items-center cursor-pointer outline-none shadow-md"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <AiOutlineLogout color="red" fontSize={21} />
-              </button>
-            )}
-            onLogoutSuccess={logout}
-            cookiePolicy="single_host_origin"
-          />
+          <button
+            type="button"
+            className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
+            onClick={logout}
+          >
+            <AiOutlineLogout color="red" fontSize={21} />
+          </button>
         )}
       </div>
     </div>
