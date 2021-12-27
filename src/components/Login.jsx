@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const responseGoogle = (response) => {
-    console.log(response);
+    console.log(`${process.env.REACT_APP_GOOGLE_API_TOKEN}`);
     localStorage.setItem("user", JSON.stringify(response.profileObj));
     const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
