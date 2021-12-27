@@ -148,7 +148,7 @@ const PostDetail = ({ user }) => {
             />
             <button
               type="button"
-              className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold
+              className="bg-rose-500 text-white rounded-full px-6 py-2 font-semibold
            text-base outline-none"
               onClick={addComment}
             >

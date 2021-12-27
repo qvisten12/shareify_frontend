@@ -87,7 +87,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
               {alreadySaved ? (
                 <button
                   type="button"
-                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
+                  className="bg-rose-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
                   {save?.length} Saved
                 </button>
@@ -98,14 +98,14 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
                     savePost(_id);
                   }}
                   type="button"
-                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
+                  className="bg-rose-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
                   Save
                 </button>
               )}
             </div>
             <div className="flex justify-between items-center gap-2 w-full">
-              {source && (
+              {/* {source && (
                 <a
                   href={source}
                   target="_blank"
@@ -116,7 +116,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
                   <BsFillArrowUpRightCircleFill />
                   {source.length > 15 ? source.slice(8, 15) : source.slice(8)}
                 </a>
-              )}
+              )} */}
               {postedBy?._id === user?.googleId && (
                 <button
                   type="button"

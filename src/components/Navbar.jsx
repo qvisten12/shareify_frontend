@@ -36,7 +36,10 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         />
       </div>
       <div className="flex gap-3">
-        <Link to={`user-profile/${user?._id}`} className="hidden md:block">
+        <Link
+          to={`user-profile/${user?._id}`}
+          className="hidden md:block hover:scale-105"
+        >
           <img
             src={user.image}
             alt="user"
@@ -45,18 +48,19 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         </Link>
         <Link
           to="create-post"
-          className="bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
-         justify-center items-center"
+          className="bg-teal-500 text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
+         justify-center items-center hover:scale-105"
         >
           <IoMdAdd />
         </Link>
         {User?.googleId && (
           <button
             type="button"
-            className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
+            className=" bg-white p-2 rounded-lg cursor-pointer outline-none shadow-md
+            hover:scale-105"
             onClick={logout}
           >
-            <AiOutlineLogout color="red" fontSize={21} />
+            <AiOutlineLogout className="text-teal-500" fontSize={25} />
           </button>
         )}
       </div>

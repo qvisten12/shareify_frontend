@@ -8,7 +8,7 @@ import { client } from "../client";
 const Login = () => {
   const navigate = useNavigate();
 
-  // const testLogin = () => {
+  // const test = () => {
   //   const testProfileObj = {
   //     email: "testuser@email.com",
   //     familyName: "user",
