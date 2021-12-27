@@ -17,20 +17,14 @@ const Home = () => {
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
 
-  const navigate = useNavigate();
-
   const userInfo = fetchUser();
 
   useEffect(() => {
-    if (userInfo) {
-      const query = userQuery(userInfo?.googleId);
+    const query = userQuery(userInfo?.googleId);
 
-      client.fetch(query).then((data) => {
-        setUser(data[0]);
-      });
-    } else {
-      navigate("/login");
-    }
+    client.fetch(query).then((data) => {
+      setUser(data[0]);
+    });
   }, []);
 
   useEffect(() => {

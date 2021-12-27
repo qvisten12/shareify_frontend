@@ -9,10 +9,8 @@ import { client } from "../client";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const responseGoogle = (response) => {
     localStorage.setItem("user", JSON.stringify(response.profileObj));
-    console.log(response);
     const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
       _id: googleId,
@@ -42,7 +40,7 @@ const Login = () => {
           <div className="p-5 bg-mainColor rounded-lg cursor-pointer outline-none mb-5">
             <img src={logo} alt="logo" />
           </div>
-
+          ;
           <div className="shadow-2xl">
             <GoogleLogin
               clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
