@@ -59,7 +59,8 @@ const Login = () => {
           controls={false}
           muted
           autoPlay
-          className="w-full h-full object-cover"
+          playsInline
+          className="w-full h-full object-cover bg-white"
         />
 
         <div
@@ -74,7 +75,7 @@ const Login = () => {
           mt-10 p-3 rounded-lg cursor-pointer outline-none w-28 bg-emerald-200"
           >
             <button
-              className="font-bold text-gray-700"
+              className="font-bold text-gray-700 md:text-lg"
               type="button"
               onClick={test}
             >
@@ -83,11 +84,12 @@ const Login = () => {
           </div>
           <div
             className="bg-mainColor flex justify-center items-center
-          mt-10 p-3 rounded-lg outline-none bg-rose-300"
+          mt-10 p-3 rounded-lg outline-none bg-rose-300 mx-3"
           >
             <p>
-              <span className="font-bold">Note:</span> Shareify is currently not
-              working on mobile browsers!
+              <span className="font-bold text-base md:text-lg">Note:</span>
+              Shareify is currently not working on mobile browsers! This will be
+              resolved asap.
             </p>
           </div>
         </div>
