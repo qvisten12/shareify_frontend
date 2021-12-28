@@ -9,6 +9,8 @@ import { registeredUsersQuery } from "../utils/data";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errormessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ const Login = () => {
 
     const { email, _id, imageUrl } = testProfileObj;
     const doc = {
-      _id: "ac92b1cd-499c-41de-8a28-0347a1ef807f",
+      _id: _id,
       _type: "user",
       email: email,
       password: "123",
@@ -74,6 +76,9 @@ const Login = () => {
         client.createIfNotExists(doc).then(() => {
           navigate("/", { replace: true });
         });
+      } else {
+        setError(true);
+        setErrorMessage("Please check your login details and try again!");
       }
     });
   };
@@ -133,6 +138,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {error && <p className="text-rose-500 my-3">{errormessage}</p>}
               <div className="flex justify-evenly mt-2">
                 <button
                   type="submit"
@@ -165,7 +171,7 @@ const Login = () => {
           </div>
 
           <div
-            className="bg-mainColor flex justify-center items-center
+            className=" flex justify-center items-center
           mt-10 p-3 rounded-lg outline-none bg-rose-300 mx-3"
           >
             <p>
