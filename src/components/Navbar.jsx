@@ -37,7 +37,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
       </div>
       <div className="flex gap-3">
         <Link
-          to={`user-profile/${user?._id}`}
+          to={`/user-profile/${user?._id}`}
           className="hidden md:block hover:scale-105"
         >
           <img
@@ -47,7 +47,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           />
         </Link>
         <Link
-          to="create-post"
+          to="/create-post"
           className="bg-emerald-500 text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex
          justify-center items-center hover:scale-105"
         >

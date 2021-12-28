@@ -51,13 +51,18 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
     });
   };
 
+  const navigateToPost = (id) => {
+    navigate(`/post-detail/${id}`);
+    window.location.reload();
+  };
+
   return (
     <div className="m-2">
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
-        onClick={() => navigate(`/post-detail/${_id}`)}
-        className="relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden
+        onClick={() => navigateToPost(_id)}
+        className="relative cursor-pointer w-auto hover:shadow-lg rounded-lg overflow-hidden
         transition-all duration-500 ease-in-out"
       >
         <img
@@ -122,7 +127,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
         )}
       </div>
       <Link
-        to={`user-profile/${postedBy?._id}`}
+        to={`/user-profile/${postedBy?._id}`}
         className="flex gap-2 mt-2 items-center"
       >
         <img
