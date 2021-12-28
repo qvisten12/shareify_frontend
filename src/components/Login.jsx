@@ -169,17 +169,6 @@ const Login = () => {
               Try First!
             </button>
           </div>
-
-          <div
-            className=" flex justify-center items-center
-          mt-10 p-3 rounded-lg outline-none bg-rose-300 mx-3"
-          >
-            <p>
-              <span className="font-bold text-base md:text-lg">Note:</span>{" "}
-              Shareify is currently not working on mobile browsers! This will be
-              resolved asap.
-            </p>
-          </div>
         </div>
       </div>
     </div>
