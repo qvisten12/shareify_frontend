@@ -141,7 +141,7 @@ const Register = () => {
                   className="font-semibold hover:text-gray-700 hover:bg-emerald-200
               p-2 rounded-lg cursor-pointer outline-none  text-white bg-emerald-500"
                 >
-                  Login
+                  Register
                 </button>
                 <button
                   type="button"
