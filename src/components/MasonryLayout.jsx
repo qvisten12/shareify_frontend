@@ -13,7 +13,10 @@ const breakpointsObj = {
 
 const MasonryLayout = ({ posts }) => {
   return (
-    <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointsObj}>
+    <Masonry
+      className="flex animate-slide-fwd mb-20 md:mb-5"
+      breakpointCols={breakpointsObj}
+    >
       {posts?.map((post) => (
         <Post key={post._id} post={post} className="w-max" />
       ))}

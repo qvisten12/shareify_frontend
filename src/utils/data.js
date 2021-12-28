@@ -4,6 +4,11 @@ export const userQuery = (userId) => {
   return query;
 };
 
+export const registeredUsersQuery = (email, password) => {
+  const query = `*[_type == "user" && email == '${email}' && password == '${password}']`;
+  return query;
+};
+
 export const searchQuery = (searchTerm) => {
   const query = `*[_type == "post" && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
         image{
@@ -15,14 +20,14 @@ export const searchQuery = (searchTerm) => {
             source,
             postedBy->{
               _id,
-              userName,
+              email,
               image
             },
             save[]{
               _key,
               postedBy->{
                 _id,
-                userName,
+                email,
                 image
               },
             },
@@ -40,14 +45,14 @@ export const feedQuery = `*[_type == "post"] | order(_createdAt desc) {
       source,
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
       save[]{
         _key,
         postedBy->{
           _id,
-          userName,
+          email,
           image
         },
       },
@@ -67,13 +72,13 @@ export const postDetailQuery = (postId) => {
     source,
     postedBy->{
       _id,
-      userName,
+      email,
       image
     },
    save[]{
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
     },
@@ -82,7 +87,7 @@ export const postDetailQuery = (postId) => {
       _key,
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
     }
@@ -101,14 +106,14 @@ export const postDetailMorePostQuery = (post) => {
     source,
     postedBy->{
       _id,
-      userName,
+      email,
       image
     },
     save[]{
       _key,
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
     },
@@ -127,13 +132,13 @@ export const userCreatedPostsQuery = (userId) => {
     source,
     postedBy->{
       _id,
-      userName,
+      email,
       image
     },
     save[]{
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
     },
@@ -152,13 +157,13 @@ export const userSavedPostsQuery = (userId) => {
     source,
     postedBy->{
       _id,
-      userName,
+      email,
       image
     },
     save[]{
       postedBy->{
         _id,
-        userName,
+        email,
         image
       },
     },

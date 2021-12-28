@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
-import { IoIosArrowForward } from "react-icons/io";
 import { categories } from "../utils/data";
 
 import logo from "../assets/logo2.png";
@@ -28,7 +27,7 @@ const Sidebar = ({ user, closeToggle }) => {
           className="flex px-5 gap-2 my-6 pt-1 w-210 items-center"
           onClick={handleCloseSidebar}
         >
-          <img src={logo} alt="logo" className="w-full" />
+          <img src={logo} alt="logo" className="w-40 md:w-full" />
         </Link>
         <div className="flex flex-col gap-5">
           <NavLink
@@ -74,7 +73,9 @@ const Sidebar = ({ user, closeToggle }) => {
             alt="user-profile"
             className="w-10 h-10 rounded-full"
           />
-          <p>{user.userName}</p>
+          <p className="capitalize">
+            {user.givenName} {user.surName}
+          </p>
         </Link>
       )}
     </div>

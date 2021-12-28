@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { MdDownloadForOffline } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
-import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
 import { UrlFor, client } from "../client";
 import { fetchUser } from "../utils/fetchUser";
@@ -17,7 +16,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
   const user = fetchUser();
 
   const alreadySaved = !!save?.filter(
-    (item) => item?.postedBy?._id === user?.googleId
+    (item) => item?.postedBy?._id === user?._id
   )?.length;
 
   const savePost = (id) => {
@@ -31,10 +30,10 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
           .insert("after", "save[-1]", [
             {
               _key: uuidv4(),
-              userId: user?.googleId,
+              userId: user?._id,
               postedBy: {
                 _type: "postedBy",
-                _ref: user.googleId,
+                _ref: user._id,
               },
             },
           ])
@@ -105,19 +104,7 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
               )}
             </div>
             <div className="flex justify-between items-center gap-2 w-full">
-              {/* {source && (
-                <a
-                  href={source}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4
-              rounded-full opacity-70 hover:100 hover:shadow-md"
-                >
-                  <BsFillArrowUpRightCircleFill />
-                  {source.length > 15 ? source.slice(8, 15) : source.slice(8)}
-                </a>
-              )} */}
-              {postedBy?._id === user?.googleId && (
+              {postedBy?._id === user?._id && (
                 <button
                   type="button"
                   onClick={(e) => {
@@ -143,7 +130,9 @@ const Post = ({ post: { postedBy, image, _id, source, save } }) => {
           src={postedBy?.image}
           alt="user-profile"
         />
-        <p className="font-semibold capitalize">{postedBy?.userName}</p>
+        <p className="font-semibold capitalize">
+          {postedBy?.email.split("@")[0]}
+        </p>
       </Link>
     </div>
   );

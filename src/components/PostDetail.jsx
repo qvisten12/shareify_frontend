@@ -108,7 +108,7 @@ const PostDetail = ({ user }) => {
               alt="user-profile"
             />
             <p className="font-semibold capitalize">
-              {postDetail.postedBy?.userName}
+              {postDetail.postedBy?.email.split("@")[0]}
             </p>
           </Link>
           <h2 className="mt-5 text-2xl">Comments</h2>
@@ -124,7 +124,9 @@ const PostDetail = ({ user }) => {
                   className="w-10 h-10 rounded-full cursor-pointer"
                 />
                 <div className="flex flex-col">
-                  <p className="font-bold ">{comment.postedBy.userName}</p>
+                  <p className="font-bold capitalize">
+                    {comment.postedBy.email.split("@")[0]}
+                  </p>
                   <p>{comment.comment}</p>
                 </div>
               </div>

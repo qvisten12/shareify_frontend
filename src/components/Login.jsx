@@ -1,52 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logo2.png";
 
 import { client } from "../client";
+import { registeredUsersQuery } from "../utils/data";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
-
-  // const test = () => {
-  //   const testProfileObj = {
-  //     email: "testuser@email.com",
-  //     familyName: "user",
-  //     givenName: "test",
-  //     googleId: "ac92b1cd-499c-41de-8a28-0347a1ef807f",
-  //     imageUrl:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu3_qIHtXBZ7vZeMQhyD8qLC1VRB9ImHadL09KET_iSQEX6ags4ICknfmqEKz8Nf6IOsA&usqp=CAU",
-  //     name: "test user",
-  //   };
-
-  //   localStorage.setItem("user", JSON.stringify(testProfileObj));
-  //   const { name, googleId, imageUrl } = testProfileObj;
-  //   const doc = {
-  //     _id: googleId,
-  //     _type: "user",
-  //     userName: name,
-  //     image: imageUrl,
-  //   };
-  //   client.createIfNotExists(doc).then(() => {
-  //     navigate("/", { replace: true });
-  //   });
-  // };
 
   const test = () => {
     localStorage.clear();
     const testProfileObj = {
       email: "testuser@email.com",
-      familyName: "user",
+      surName: "user",
       givenName: "test",
-      googleId: "ac92b1cd-499c-41de-8a28-0347a1ef807f",
+      password: "123",
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu3_qIHtXBZ7vZeMQhyD8qLC1VRB9ImHadL09KET_iSQEX6ags4ICknfmqEKz8Nf6IOsA&usqp=CAU",
       name: "test user",
+      _id: "ac92b1cd-499c-41de-8a28-0347a1ef807f",
     };
 
     localStorage.setItem("user", JSON.stringify(testProfileObj));
 
-    navigate("/");
+    const { email, _id, imageUrl } = testProfileObj;
+    const doc = {
+      _id: "ac92b1cd-499c-41de-8a28-0347a1ef807f",
+      _type: "user",
+      email: email,
+      password: "123",
+      image: imageUrl,
+      surName: "user",
+      givenName: "test",
+    };
+    client.createIfNotExists(doc).then(() => {
+      navigate("/", { replace: true });
+    });
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+
+    const query = registeredUsersQuery(email, password);
+    client.fetch(query).then((data) => {
+      if (data.length > 0) {
+        localStorage.clear();
+
+        const loginObj = {
+          email: data[0].email,
+          surName: data[0].surName,
+          givenName: data[0].givenName,
+          name: data[0].givenName + " " + data[0].surName,
+          _id: data[0]._id,
+          imageUrl: data[0].image,
+        };
+
+        localStorage.setItem("user", JSON.stringify(loginObj));
+
+        const { email, _id, imageUrl, surName, givenName } = loginObj;
+        const doc = {
+          _id: _id,
+          _type: "user",
+          email: email,
+          password: password,
+          image: imageUrl,
+          surName: surName,
+          givenName: givenName,
+        };
+        client.createIfNotExists(doc).then(() => {
+          navigate("/", { replace: true });
+        });
+      }
+    });
+  };
+
+  const register = () => {
+    navigate("/register");
   };
 
   return (
@@ -70,24 +103,73 @@ const Login = () => {
           <div className="p-5 bg-mainColor rounded-lg cursor-pointer outline-none">
             <img src={logo} alt="logo" />
           </div>
+
           <div
-            className="hover:bg-mainColor flex justify-center items-center
-          mt-10 p-3 rounded-lg cursor-pointer outline-none w-28 bg-emerald-200"
+            className="p-5 bg-mainColor rounded-lg mt-10
+          flex flex-col justify-center items-center min-w-350"
           >
+            <h2 className="font-bold text-gray-700 text-lg">Login</h2>
+            <form className="w-full my-2" onSubmit={login}>
+              <div className="flex justify-around">
+                <label className="font-semibold text-gray-700 w-32">
+                  Email:
+                </label>
+                <input
+                  className="rounded-md border-2
+                  text-sm  border-gray-100 w-40"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="flex justify-around mt-2">
+                <label className="font-semibold text-gray-700 w-32">
+                  Password:
+                </label>
+                <input
+                  className="rounded-md border-2 border-gray-100 w-40"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="flex justify-evenly mt-2">
+                <button
+                  type="submit"
+                  className="font-semibold hover:text-gray-700 hover:bg-emerald-200
+              p-2 rounded-lg cursor-pointer outline-none  text-white bg-emerald-500"
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  onClick={register}
+                  className="font-semibold hover:text-gray-700 hover:bg-emerald-200
+              p-2 rounded-lg cursor-pointer outline-none  text-white bg-emerald-500"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+
+            <p className="mt-5 text-lg text-gray-700 font-bold">Or</p>
+
             <button
-              className="font-bold text-gray-700 md:text-lg"
+              className="mt-5 font-bold hover:text-gray-700 md:text-lg  hover:bg-emerald-200
+              p-3 rounded-lg cursor-pointer outline-none w-28 text-white bg-emerald-500"
               type="button"
               onClick={test}
             >
-              Try Me!
+              Try First!
             </button>
           </div>
+
           <div
             className="bg-mainColor flex justify-center items-center
           mt-10 p-3 rounded-lg outline-none bg-rose-300 mx-3"
           >
             <p>
-              <span className="font-bold text-base md:text-lg">Note:</span>
+              <span className="font-bold text-base md:text-lg">Note:</span>{" "}
               Shareify is currently not working on mobile browsers! This will be
               resolved asap.
             </p>

@@ -53,7 +53,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         >
           <IoMdAdd />
         </Link>
-        {User?.googleId && (
+        {User?._id && (
           <button
             type="button"
             className=" bg-white p-2 rounded-lg cursor-pointer outline-none shadow-md
