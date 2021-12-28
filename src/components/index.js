@@ -9,3 +9,4 @@ export { default as PostDetail } from "./PostDetail";
 export { default as MasonryLayout } from "./MasonryLayout";
 export { default as Spinner } from "./Spinner";
 export { default as Post } from "./Post";
+export { default as Register } from "./Register";
