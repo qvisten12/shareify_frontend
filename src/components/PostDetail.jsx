@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { MdDownloadForOffline } from "react-icons/md";
-import { Link, useParams, userParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { client, UrlFor } from "../client";
 import { MasonryLayout } from ".";
 import { postDetailMorePostQuery, postDetailQuery } from "../utils/data";
 import { Spinner } from ".";
-import { IoMdHeartEmpty } from "react-icons/io";
 
 const PostDetail = ({ user }) => {
   const [posts, setPosts] = useState(null);
